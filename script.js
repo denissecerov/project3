@@ -7,7 +7,7 @@ function createTiles() {
     for (let i = 0; i < gridSize * gridSize - 1; i++) {
         tiles.push(i + 1);
     }
-    tiles.push(null); // For the empty space
+    tiles.push(null); 
     shuffleTiles();
 }
 
