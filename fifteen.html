@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="fifteen.css">
 </head>
 <body>
-		  <div id="puzzle-container"></div>
-		  
-<div id="imageSelectorContainer">
-        <label for="imageSelector">Select Puzzle Image:</label>
-        <select id="imageSelector" onchange="changePuzzleImage()">
-            <option value="background.jpg">Macaw</option>
-            <option value="background2.jpg">Flowers</option>
-            <option value="background3.jpg">Pirate</option>
-			<option value="background4.jpg">FingerPrint</option>
-        </select>
+    <div class="main-container">
+        <header>
+            <h1>Fifteen Puzzle Game</h1>
+        </header>
+        <div id="puzzle-container"></div>
+        <div id="imageSelectorContainer">
+            <label for="imageSelector">Select Puzzle Image:</label>
+            <select id="imageSelector" onchange="changePuzzleImage()">
+                <option value="background.jpg">Macaw</option>
+                <option value="background2.jpg">Flowers</option>
+                <option value="background3.jpg">Pirate</option>
+                <option value="background4.jpg">FingerPrint</option>
+            </select>
+        </div>
+        <button id="cheat-button" onclick="cheat()">Cheat</button>
     </div>
-	
-	    <div id="content">
-
-    <button id="cheat-button" onclick="cheat()">Cheat</button>
     <script src="fifteen.js"></script>
 </body>
 </html>
