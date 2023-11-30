@@ -28,10 +28,13 @@ function renderTiles() {
         tile.style.height = imageSize / gridSize + 'px';
 
         if (number !== null) {
-          tile.style.backgroundImage = `url('macaw.jpg')`;
+            tile.style.backgroundImage = `url('macaw.jpg')`;
             tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
-            tile.style.backgroundPositionX = `${-(number % gridSize) * (imageSize / gridSize)}px`;
-            tile.style.backgroundPositionY = `${-Math.floor(number / gridSize) * (imageSize / gridSize)}px`;
+
+            const correctX = (number - 1) % gridSize;
+            const correctY = Math.floor((number - 1) / gridSize);
+            tile.style.backgroundPositionX = `${-correctX * (imageSize / gridSize)}px`;
+            tile.style.backgroundPositionY = `${-correctY * (imageSize / gridSize)}px`;
 
             tile.addEventListener('click', () => moveTile(index));
         }
@@ -39,6 +42,7 @@ function renderTiles() {
         puzzleContainer.appendChild(tile);
     });
 }
+
 
 function moveTile(index) {
     const emptyIndex = tiles.indexOf(null);
@@ -56,5 +60,20 @@ function checkWin() {
     }
 }
 
+function addCheatButton() {
+    const cheatButton = document.createElement('button');
+    cheatButton.textContent = 'Cheat';
+    cheatButton.addEventListener('click', () => cheat());
+    puzzleContainer.appendChild(cheatButton);
+}
+
+function cheat() {
+    const solvedState = Array.from({ length: gridSize * gridSize - 1 }, (_, i) => i + 1);
+    solvedState.push(null);
+    tiles = solvedState.slice(); 
+    renderTiles();
+}
+
 createTiles();
 renderTiles();
+addCheatButton();
