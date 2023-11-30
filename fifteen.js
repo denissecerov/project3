@@ -3,6 +3,14 @@ const gridSize = 4;
 let tiles = [];
 const imageSize = 400;
 
+
+function shuffleTiles() {
+    for (let i = tiles.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+    }
+}
+
 function createTiles() {
     tiles = [];
     for (let i = 0; i < gridSize * gridSize - 1; i++) {
@@ -12,37 +20,39 @@ function createTiles() {
     shuffleTiles();
 }
 
-function shuffleTiles() {
-    for (let i = tiles.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
-    }
-}
-
 function renderTiles() {
     puzzleContainer.innerHTML = '';
     tiles.forEach((number, index) => {
         const tile = document.createElement('div');
+        tile.id = `tile-${index}`;
         tile.className = 'tile';
         tile.style.width = imageSize / gridSize + 'px';
         tile.style.height = imageSize / gridSize + 'px';
 
         if (number !== null) {
-            tile.style.backgroundImage = `url('background.jpg')`;
-            tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
-
-            const correctX = (number - 1) % gridSize;
-            const correctY = Math.floor((number - 1) / gridSize);
-            tile.style.backgroundPositionX = `${-correctX * (imageSize / gridSize)}px`;
-            tile.style.backgroundPositionY = `${-correctY * (imageSize / gridSize)}px`;
-
             tile.addEventListener('click', () => moveTile(index));
         }
 
         puzzleContainer.appendChild(tile);
     });
+
+    // Set default background image when rendering initially
+    setDefaultBackgroundImage();
 }
 
+function setDefaultBackgroundImage() {
+    const selectedImage = document.getElementById('imageSelector').value;
+
+    tiles.forEach((number, index) => {
+        const tile = document.getElementById(`tile-${index}`);
+        if (tile && number !== null) {
+            tile.style.backgroundImage = `url('${selectedImage}')`;
+            tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
+            tile.style.backgroundPositionX = `${-(number % gridSize) * (imageSize / gridSize)}px`;
+            tile.style.backgroundPositionY = `${-Math.floor(number / gridSize) * (imageSize / gridSize)}px`;
+        }
+    });
+}
 
 function moveTile(index) {
     const emptyIndex = tiles.indexOf(null);
@@ -61,13 +71,6 @@ function checkWin() {
     }
 }
 
-function addCheatButton() {
-    const cheatButton = document.createElement('button');
-    cheatButton.textContent = 'Cheat';
-    cheatButton.addEventListener('click', () => cheat());
-    puzzleContainer.appendChild(cheatButton);
-}
-
 function cheat() {
     const solvedState = Array.from({ length: gridSize * gridSize - 1 }, (_, i) => i + 1);
     solvedState.push(null);
@@ -75,11 +78,22 @@ function cheat() {
     renderTiles();
 }
 
-function changeBackgroundColor() {
-    const select = document.getElementById('backgroundColor');
-    const selectedColor = select.value;
+function changePuzzleImage() {
+    const select = document.getElementById('imageSelector');
+    const selectedImage = select.value;
+	
 
-    document.body.style.backgroundColor = selectedColor;
+    tiles.forEach((number, index) => {
+        const tile = document.getElementById(`tile-${index}`);
+        if (tile && number !== null) {
+            tile.style.backgroundImage = `url('${selectedImage}')`;
+            tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
+            tile.style.backgroundPositionX = `${-(number % gridSize) * (imageSize / gridSize)}px`;
+            tile.style.backgroundPositionY = `${-Math.floor(number / gridSize) * (imageSize / gridSize)}px`;
+        }
+    });
+	
 }
+
 createTiles();
 renderTiles();

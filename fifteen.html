@@ -7,17 +7,20 @@
     <link rel="stylesheet" href="fifteen.css">
 </head>
 <body>
- <label for="backgroundColor">Select Background Color:</label>
-    <select id="backgroundColor" onchange="changeBackgroundColor()">
-        <option value="white">White</option>
-        <option value="lightblue">Light Blue</option>
-        <option value="lightgreen">Light Green</option>
-        <option value="lightpink">Light Pink</option>
-    </select>
+		  <div id="puzzle-container"></div>
+		  
+<div id="imageSelectorContainer">
+        <label for="imageSelector">Select Puzzle Image:</label>
+        <select id="imageSelector" onchange="changePuzzleImage()">
+            <option value="background.jpg">Macaw</option>
+            <option value="background2.jpg">Flowers</option>
+            <option value="background3.jpg">Pirate</option>
+			<option value="background4.jpg">FingerPrint</option>
+        </select>
+    </div>
 	
 	    <div id="content">
 
-    <div id="puzzle-container"></div>
     <button id="cheat-button" onclick="cheat()">Cheat</button>
     <script src="fifteen.js"></script>
 </body>
