@@ -1,13 +1,14 @@
 const puzzleContainer = document.getElementById('puzzle-container');
 const gridSize = 4;
 let tiles = [];
+const imageSize = 400;
 
 function createTiles() {
     tiles = [];
     for (let i = 0; i < gridSize * gridSize - 1; i++) {
         tiles.push(i + 1);
     }
-    tiles.push(null); 
+    tiles.push(null);
     shuffleTiles();
 }
 
@@ -23,10 +24,18 @@ function renderTiles() {
     tiles.forEach((number, index) => {
         const tile = document.createElement('div');
         tile.className = 'tile';
+        tile.style.width = imageSize / gridSize + 'px';
+        tile.style.height = imageSize / gridSize + 'px';
+
         if (number !== null) {
-            tile.textContent = number;
+          tile.style.backgroundImage = `url('macaw.jpg')`;
+            tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
+            tile.style.backgroundPositionX = `${-(number % gridSize) * (imageSize / gridSize)}px`;
+            tile.style.backgroundPositionY = `${-Math.floor(number / gridSize) * (imageSize / gridSize)}px`;
+
             tile.addEventListener('click', () => moveTile(index));
         }
+
         puzzleContainer.appendChild(tile);
     });
 }
