@@ -46,10 +46,13 @@ function setDefaultBackgroundImage() {
     tiles.forEach((number, index) => {
         const tile = document.getElementById(`tile-${index}`);
         if (tile && number !== null) {
+            const correctX = (number - 1) % gridSize;
+            const correctY = Math.floor((number - 1) / gridSize);
+
             tile.style.backgroundImage = `url('${selectedImage}')`;
             tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
-            tile.style.backgroundPositionX = `${-(number % gridSize) * (imageSize / gridSize)}px`;
-            tile.style.backgroundPositionY = `${-Math.floor(number / gridSize) * (imageSize / gridSize)}px`;
+            tile.style.backgroundPositionX = `-${correctX * (imageSize / gridSize)}px`;
+            tile.style.backgroundPositionY = `-${correctY * (imageSize / gridSize)}px`;
         }
     });
 }
@@ -61,26 +64,22 @@ function moveTile(index) {
         const tile = document.getElementById(`tile-${index}`);
         const emptyTile = document.getElementById(`tile-${emptyIndex}`);
 
-        // Add animation class to the tiles
         tile.classList.add('animated-tile');
         emptyTile.classList.add('animated-tile');
 
-        // Swap the tiles
         [tiles[emptyIndex], tiles[index]] = [tiles[index], tiles[emptyIndex]];
 
-        // After the animation ends, remove the animation class
         setTimeout(() => {
             tile.classList.remove('animated-tile');
             emptyTile.classList.remove('animated-tile');
             renderTiles();
             checkWin();
-        }, 200); // Use the same duration as the CSS transition
+        }, 200);
     }
 }
 
 function checkWin() {
     if (tiles.every((tile, i) => tile === i + 1 || tile === null)) {
-        // Redirect to another webpage
         window.location.href = 'congrats.html';
     }
 }
@@ -95,19 +94,29 @@ function cheat() {
 function changePuzzleImage() {
     const select = document.getElementById('imageSelector');
     const selectedImage = select.value;
-	
+
+    puzzleContainer.innerHTML = '';
+
+    createTiles();
+    shuffleTiles();
 
     tiles.forEach((number, index) => {
-        const tile = document.getElementById(`tile-${index}`);
-        if (tile && number !== null) {
+        const tile = document.createElement('div');
+        tile.id = `tile-${index}`;
+        tile.className = 'tile';
+        tile.style.width = imageSize / gridSize + 'px';
+        tile.style.height = imageSize / gridSize + 'px';
+
+        if (number !== null) {
+            tile.addEventListener('click', () => moveTile(index));
             tile.style.backgroundImage = `url('${selectedImage}')`;
             tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
             tile.style.backgroundPositionX = `${-(number % gridSize) * (imageSize / gridSize)}px`;
             tile.style.backgroundPositionY = `${-Math.floor(number / gridSize) * (imageSize / gridSize)}px`;
         }
-    });
-	
-}
 
+        puzzleContainer.appendChild(tile);
+    });
+}
 createTiles();
 renderTiles();
