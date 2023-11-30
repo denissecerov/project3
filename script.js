@@ -76,4 +76,3 @@ function cheat() {
 
 createTiles();
 renderTiles();
-addCheatButton();
