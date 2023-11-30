@@ -19,6 +19,8 @@ function shuffleTiles() {
     }
 }
 
+
+
 function renderTiles() {
     puzzleContainer.innerHTML = '';
     tiles.forEach((number, index) => {
@@ -74,5 +76,11 @@ function cheat() {
     renderTiles();
 }
 
+function changeBackgroundColor() {
+    const select = document.getElementById('backgroundColor');
+    const selectedColor = select.value;
+
+    document.body.style.backgroundColor = selectedColor;
+}
 createTiles();
 renderTiles();
