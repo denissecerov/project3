@@ -19,8 +19,6 @@ function shuffleTiles() {
     }
 }
 
-
-
 function renderTiles() {
     puzzleContainer.innerHTML = '';
     tiles.forEach((number, index) => {
@@ -30,7 +28,7 @@ function renderTiles() {
         tile.style.height = imageSize / gridSize + 'px';
 
         if (number !== null) {
-            tile.style.backgroundImage = `url('macaw.jpg')`;
+            tile.style.backgroundImage = `url('background.jpg')`;
             tile.style.backgroundSize = `${imageSize}px ${imageSize}px`;
 
             const correctX = (number - 1) % gridSize;
@@ -58,7 +56,8 @@ function moveTile(index) {
 
 function checkWin() {
     if (tiles.every((tile, i) => tile === i + 1 || tile === null)) {
-        alert('Congratulations! You solved the puzzle.');
+        // Redirect to another webpage
+        window.location.href = 'congrats.html';
     }
 }
 
