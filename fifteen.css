@@ -1,7 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-container {
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
 #puzzle-container {
     width: 400px;
     height: 400px;
-    margin: 30px auto;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 5px;
@@ -11,73 +34,90 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     font-size: 24px;
     cursor: pointer;
-	transition: transform 0.2s ease-in-out; /* Add this line for the animation */
-
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-	position:fixed;
-	bottom:10px;
-}
-
-select {
-    position: fixed;
-	bottom:12px;
-    left: 9%;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.congratsPage
-{
-    background-image: url('Confetti.gif');
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0px;
-}
-
-.congrats
-{
-    position: relative; top: 300px;
-    background-color: gray;
-    border-radius: 5px;
-    margin: auto;
-    width: 400px; height: 200px;
-    text-align: center;
-}
-
-.youWin
-{
-    color: goldenrod;
-    font-size: 50pt;
-    font-family: "Arial Black", Times, serif;
-}
-
-.link
-{
-    text-decoration: none;
-    font-size: 15pt;
-}
-.link:hover
-{
-    color: skyblue;
+    transition: transform 0.2s ease-in-out;
 }
 
 #imageSelectorContainer {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.congratsPage {
+    background-image: url('confetti.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.congrats {
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 60%; 
+    max-width: 400px;
+}
+
+.youWin {
+    color: #4CAF50;
+    font-size: 2em;
+    margin: 0.5em 0;
+    animation: pulse 1s infinite alternate;
+}
+
+.winMessage {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 1em;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.link:hover {
+    background-color: #0056b3;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+}
+
+label, select, button {
+    font-size: 14px;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
 }
 
 .animated-tile {
-    transform: scale(1.1); /* Adjust the scaling factor as needed */
+    transform: scale(1.1);
 }
+
