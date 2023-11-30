@@ -58,9 +58,23 @@ function moveTile(index) {
     const emptyIndex = tiles.indexOf(null);
     const validMoves = [emptyIndex - 1, emptyIndex + 1, emptyIndex - gridSize, emptyIndex + gridSize];
     if (validMoves.includes(index)) {
+        const tile = document.getElementById(`tile-${index}`);
+        const emptyTile = document.getElementById(`tile-${emptyIndex}`);
+
+        // Add animation class to the tiles
+        tile.classList.add('animated-tile');
+        emptyTile.classList.add('animated-tile');
+
+        // Swap the tiles
         [tiles[emptyIndex], tiles[index]] = [tiles[index], tiles[emptyIndex]];
-        renderTiles();
-        checkWin();
+
+        // After the animation ends, remove the animation class
+        setTimeout(() => {
+            tile.classList.remove('animated-tile');
+            emptyTile.classList.remove('animated-tile');
+            renderTiles();
+            checkWin();
+        }, 200); // Use the same duration as the CSS transition
     }
 }
 
