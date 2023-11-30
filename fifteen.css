@@ -31,3 +31,38 @@ select {
     padding: 10px;
     border-radius: 8px;
 }
+
+.congratsPage
+{
+    background-image: url('Confetti.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+}
+
+.congrats
+{
+    position: relative; top: 300px;
+    background-color: gray;
+    border-radius: 5px;
+    margin: auto;
+    width: 400px; height: 200px;
+    text-align: center;
+}
+
+.youWin
+{
+    color: goldenrod;
+    font-size: 50pt;
+    font-family: "Arial Black", Times, serif;
+}
+
+.link
+{
+    text-decoration: none;
+    font-size: 15pt;
+}
+.link:hover
+{
+    color: skyblue;
+}
