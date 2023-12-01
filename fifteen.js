@@ -11,6 +11,11 @@ function shuffleTiles() {
     }
 }
 
+function shufflePuzzle() {
+    shuffleTiles();
+    renderTiles();
+}
+
 function createTiles() {
     tiles = [];
     for (let i = 0; i < gridSize * gridSize - 1; i++) {
